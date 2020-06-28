@@ -1,7 +1,8 @@
+
 import { CreateRoleService } from "./CreateRoleService";
 import { IRoleRepository } from "../repositories/IRoleRepository";
 import ICreateRoleDTO from "../dto/ICreateRoleDTO";
-import { ObjectID } from 'mongodb';
+import { uuid, isUuid } from 'uuidv4';
 
 describe('CreateRoleService', () => {
   let createRole: CreateRoleService;
@@ -9,7 +10,7 @@ describe('CreateRoleService', () => {
   beforeEach(() => {
     mockRoleRepository = {
       create: jest.fn().mockImplementation((data: ICreateRoleDTO) => {
-        return { id: new ObjectID(), ...data };
+        return { id: uuid(), ...data };
       })
     }
 
@@ -27,8 +28,8 @@ describe('CreateRoleService', () => {
     });
 
     expect(role).toHaveProperty('id');
-    expect(role).toHaveProperty('name','Admin');
-    expect(role).toHaveProperty('description','Administrador do sistema');
-    expect(ObjectID.isValid(role.id)).toBeTruthy();
+    expect(role).toHaveProperty('name', 'Admin');
+    expect(role).toHaveProperty('description', 'Administrador do sistema');
+    expect(isUuid(role.id)).toBeTruthy();
   });
 });

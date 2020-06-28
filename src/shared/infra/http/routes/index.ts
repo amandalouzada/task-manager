@@ -1,14 +1,9 @@
-import { Router, Response, Request } from 'express';
+import { Router} from 'express';
+import usersRouter from '@modules/users/infra/http/routes/users.routes';
 
 const routes = Router();
-const helloWordRoute = Router();
 
-helloWordRoute.get('/', (req: Request, res: Response) => {
-  res.json(
-    { message: 'hello word route' }
-  );
-});
 
-routes.use('/api', helloWordRoute);
+routes.use('/users', usersRouter);
 
 export default routes;

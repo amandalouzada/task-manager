@@ -4,24 +4,27 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  ObjectIdColumn,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
+import { IsNotEmpty, IsDefined } from 'class-validator';
 
 @Entity('roles')
 class Role {
-  @ObjectIdColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: ObjectID;
-
+  
+  @IsNotEmpty()
+  @IsDefined()
   @Column({ nullable: false, unique: true })
   name: string;
 
   @Column()
   description: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({name:'created_at'})
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({name:'updated_at'})
   updatedAt: Date;
 }
 

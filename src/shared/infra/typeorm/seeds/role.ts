@@ -2,7 +2,7 @@ import { createConnections } from 'typeorm';
 createConnections();
 
 import { getMongoRepository, MongoRepository } from "typeorm";
-import Role from '@modules/acl/infra/typeorm/schemas/Role';
+import Role from '@modules/acl/infra/typeorm/entities/Role';
 
 const seedRoleRepository: MongoRepository<Role> = getMongoRepository(Role, 'mongo');
 
