@@ -3,9 +3,16 @@ class AppError {
 
   public readonly statusCode: number;
 
-  constructor(message: string, statusCode = 400) {
+  public readonly errors?: {
+    [key: string]: string;
+  } | undefined;
+
+  constructor(message: string, statusCode = 400, errors: {
+    [type: string]: string;
+  } | undefined) {
     this.message = message;
     this.statusCode = statusCode;
+    this.errors = errors
   }
 }
 

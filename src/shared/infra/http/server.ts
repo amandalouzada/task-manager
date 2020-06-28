@@ -11,6 +11,7 @@ import rateLimiter from './middlewares/rateLimiter';
 import routes from './routes';
 
 import '@shared/infra/typeorm';
+import '@shared/container/index';
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
     return response.status(err.statusCode).json({
       status: 'error',
       message: err.message,
+      errors: err.errors
     });
   }
 

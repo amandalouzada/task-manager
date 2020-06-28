@@ -6,12 +6,15 @@ import {
   UpdateDateColumn,
   ObjectIdColumn,
 } from 'typeorm';
+import { IsNotEmpty, IsDefined } from 'class-validator';
 
 @Entity('roles')
 class Role {
   @ObjectIdColumn()
   id: ObjectID;
-
+  
+  @IsNotEmpty()
+  @IsDefined()
   @Column({ nullable: false, unique: true })
   name: string;
 

@@ -8,6 +8,7 @@ Gerenciador de tarefas
 - Docker & Docker Compose (Setup environment);
 - Jest (for tests);
 - MongoDB
+- TSyringe (for dependency injection container)
 
 
 # Run

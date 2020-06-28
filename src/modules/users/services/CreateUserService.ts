@@ -1,27 +1,36 @@
-import { IUserRepository } from "../repositories/IUserRepository";
+import IUserRepository from "../repositories/IUserRepository";
+import { injectable, inject } from "tsyringe";
+import AppError from "@shared/errors/AppError";
 
 interface IUserRequest {
   name: string;
   email: string;
   password: string;
-  roleId?: string;
+  roles?: string[];
 }
+@injectable()
+class CreateUserService {
 
-export class CreateUserService {
-  constructor(private userRepository: IUserRepository) {
-    this.userRepository = userRepository;
-  }
+  constructor(
+    @inject('UserRepository')
+    private userRepository: IUserRepository
+  ) { }
 
   public async execute({ name,
     email,
     password,
-    roleId }: IUserRequest): Promise<any> {
+    roles }: IUserRequest): Promise<any> {
+    roles = roles || [];
+    const foundUser = await this.userRepository.findByEmail(email);
+    if (foundUser) throw new AppError('Email address already used.');
     const user = await this.userRepository.create({
       name,
       email,
       password,
-      roleId
+      roles
     });
     return user;
   }
 }
+
+export default CreateUserService;

@@ -1,7 +1,9 @@
+import 'reflect-metadata';
+
 import { ObjectID } from 'mongodb';
-import { CreateUserService } from './CreateUserService';
-import { IUserRepository } from '../repositories/IUserRepository';
-import { ICreateUserDTO } from '../dto/ICreateUserDTO';
+import CreateUserService from './CreateUserService';
+import IUserRepository from '../repositories/IUserRepository';
+import ICreateUserDTO  from '../dto/ICreateUserDTO';
 import AppError from '@shared/errors/AppError';
 
 let createUser: CreateUserService;
