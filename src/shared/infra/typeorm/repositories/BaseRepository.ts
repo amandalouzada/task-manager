@@ -1,8 +1,8 @@
 import { validate } from "class-validator";
 import AppError from "@shared/errors/AppError";
-import { getMongoRepository, MongoRepository } from "typeorm";
+import { Repository  } from "typeorm";
 export default class BaseRepository<T> {
-  protected ormRepository: MongoRepository<T>;
+  protected ormRepository: Repository<T>;
 
   constructor() {
   }

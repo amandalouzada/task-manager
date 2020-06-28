@@ -1,13 +1,15 @@
 import 'reflect-metadata';
 
-import { ObjectID } from 'mongodb';
+import { uuid, isUuid } from 'uuidv4';
 import CreateUserService from './CreateUserService';
 import IUserRepository from '../repositories/IUserRepository';
-import ICreateUserDTO  from '../dto/ICreateUserDTO';
+import ICreateUserDTO from '../dto/ICreateUserDTO';
 import AppError from '@shared/errors/AppError';
+import IHashProvider from '../providers/hashProvider/models/IHashProvider';
 
 let createUser: CreateUserService;
 let mockUserRepository: IUserRepository;
+let hashedProvider: IHashProvider;
 
 describe('CreateUserService', () => {
 
@@ -16,7 +18,7 @@ describe('CreateUserService', () => {
       create: jest.fn()
         .mockImplementation(async (data: ICreateUserDTO) => {
           return {
-            id: new ObjectID(),
+            id: uuid(),
             ...data,
           }
         }),
@@ -26,7 +28,15 @@ describe('CreateUserService', () => {
           return null;
         })
     }
-    createUser = new CreateUserService(mockUserRepository);
+    hashedProvider = {
+      generateHash: jest.fn().mockImplementation(async (password: string) => {
+        return password.replace(/\d*/g, 'A');
+      }),
+      compareHash: jest.fn().mockImplementation(async (payload: string, hashed: string) => {
+        return payload.replace(/\d*/g, 'A') === hashed;
+      })
+    }
+    createUser = new CreateUserService(mockUserRepository, hashedProvider);
   });
 
   it('should not be able to create a new user with same email from another', async () => {
@@ -45,6 +55,7 @@ describe('CreateUserService', () => {
     });
 
     expect(user).toHaveProperty('id');
+    expect(isUuid(user.id)).toBeTruthy();
     expect(user).toHaveProperty('email', 'amanda.nuneslouzada@gmail.com');
     expect(user).toHaveProperty('password');
   });

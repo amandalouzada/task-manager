@@ -1,6 +1,6 @@
-import { MongoRepository, getMongoRepository } from "typeorm";
+import { getRepository } from "typeorm";
 import IUserRepository from "@modules/users/repositories/IUserRepository";
-import User from "../schemas/User";
+import User from "../entities/User";
 import ICreateUserDTO from "@modules/users/dto/ICreateUserDTO";
 import BaseRepository from "@shared/infra/typeorm/repositories/BaseRepository";
 
@@ -9,7 +9,7 @@ export default class UserRepository extends BaseRepository<User> implements IUse
 
   constructor() {
     super()
-    this.ormRepository = getMongoRepository(User, 'mongo');
+    this.ormRepository = getRepository(User);
   }
 
   public async findByEmail(email: string): Promise<any> {
@@ -21,7 +21,7 @@ export default class UserRepository extends BaseRepository<User> implements IUse
 
   public async create({ name, email, password }: ICreateUserDTO): Promise<User> {
     const user = this.ormRepository.create({ name, email, password });
-    await this.validate(user);
+    // await this.validate(user);
     this.ormRepository.save(user)
     return user;
   }

@@ -4,23 +4,24 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  ObjectIdColumn,
-  Index
+  PrimaryGeneratedColumn,
+  JoinTable,
+  ManyToMany
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
-import { IsNotEmpty, IsDefined } from "class-validator";
+import { IsNotEmpty, IsDefined, IsEmail } from "class-validator";
 
-import Role from '@modules/acl/infra/typeorm/schemas/Role';
+import Role from '@modules/acl/infra/typeorm/entities/Role';
 
 @Entity('users')
-@Index(["email"], { unique: true })
 class User {
-  @ObjectIdColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: ObjectID;
 
   @Column({ nullable:false, unique: true })
   @IsNotEmpty()
   @IsDefined()
+  @IsEmail()
   email: string;
 
   @Column({ nullable:false})
@@ -34,13 +35,14 @@ class User {
   @IsDefined()
   password: string;
 
-  @Column(type => Role)
+  @ManyToMany(() => Role)
+  @JoinTable({name:'users_roles'})
   roles: Role[];
 
-  @CreateDateColumn()
+  @CreateDateColumn({name:'created_at'})
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({name:'updated_at'})
   updatedAt: Date;
 }
 
