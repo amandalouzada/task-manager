@@ -6,7 +6,7 @@ interface IFindAllByStatusRequest {
 }
 
 @injectable()
-export default class ListTaskService {
+export default class ListTaskByStatusService {
 
   constructor(
     @inject('TaskRepository')

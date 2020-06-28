@@ -1,13 +1,12 @@
 import 'reflect-metadata';
-import { uuid, isUuid } from 'uuidv4';
+import { uuid } from 'uuidv4';
 import { ITaskRepository } from '../repositories/ITaskRepository';
-import ICreateTaskDTO from '../dto/ICreateTaskDTO';
-import ListTaskService from './ListTaskService';
+import ListTaskByStatusService from './ListTaskByStatusService';
 import IFindAllByStatusDTO from '../dto/IFindAllByStatusDTO';
 
-describe('ListTaskService', () => {
+describe('ListTaskByStatusService', () => {
   let mockTaskRepository: ITaskRepository;
-  let listTask: ListTaskService;
+  let listTask: ListTaskByStatusService;
 
   beforeEach(() => {
     mockTaskRepository = {
@@ -16,21 +15,25 @@ describe('ListTaskService', () => {
         .mockImplementation(async (data: IFindAllByStatusDTO) => {
           const taks = [
             {
+              id: uuid(),
               title: 'Teste 1',
               description: 'Teste description 1',
               status: 'to_do'
             },
             {
+              id: uuid(),
               title: 'Teste 2',
               description: 'Teste description 2',
               status: 'done'
             },
             {
+              id: uuid(),
               title: 'Teste 3',
               description: 'Teste description 3',
               status: 'to_do'
             },
             {
+              id: uuid(),
               title: 'Teste 3',
               description: 'Teste description 3',
               status: 'doing'
@@ -39,17 +42,17 @@ describe('ListTaskService', () => {
           return taks.filter(task => data.status.includes(task.status));
         })
     }
-    listTask = new ListTaskService(mockTaskRepository);
+    listTask = new ListTaskByStatusService(mockTaskRepository);
   });
 
-  it('should be able to create a new instance', async () => {
+  it('should be able to list taks by status', async () => {
     const tasks = await listTask.execute({ status: 'to_do,doing' });
 
     tasks.forEach((task: any) => {
       expect(task).toHaveProperty('title');
       expect(task).toHaveProperty('description');
       expect(task).toHaveProperty('status');
-      expect(['doing','to_do'].includes(task.status)).toBeTruthy();
+      expect(['doing', 'to_do'].includes(task.status)).toBeTruthy();
       expect(task.status).not.toEqual('done');
     });
 
