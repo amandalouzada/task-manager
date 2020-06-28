@@ -26,8 +26,6 @@ class CreateUserService {
     roles }: IUserRequest): Promise<any> {
     roles = roles || [];
     const foundUser = await this.userRepository.findByEmail(email);
-    console.log(foundUser);
-
     if (foundUser) throw new AppError('Email address already used.');
 
     const hashedPassword = await this.hashProvider.generateHash(password);
