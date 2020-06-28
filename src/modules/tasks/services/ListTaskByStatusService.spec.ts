@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { uuid } from 'uuidv4';
-import { ITaskRepository } from '../repositories/ITaskRepository';
+import  ITaskRepository  from '../repositories/ITaskRepository';
 import ListTaskByStatusService from './ListTaskByStatusService';
 import IFindAllByStatusDTO from '../dto/IFindAllByStatusDTO';
 

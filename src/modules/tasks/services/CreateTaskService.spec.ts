@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { uuid, isUuid } from 'uuidv4';
 import CreateTaskService from './CreateTaskService';
-import { ITaskRepository } from '../repositories/ITaskRepository';
+import  ITaskRepository  from '../repositories/ITaskRepository';
 import ICreateTaskDTO from '../dto/ICreateTaskDTO';
 
 describe('CreateTaskService', () => {

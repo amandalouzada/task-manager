@@ -1,5 +1,5 @@
 import { injectable, inject } from "tsyringe";
-import { ITaskRepository } from "../repositories/ITaskRepository";
+import ITaskRepository from "../repositories/ITaskRepository";
 
 interface IFindAllByStatusRequest {
   status: string;
@@ -14,7 +14,7 @@ export default class ListTaskByStatusService {
   ) { }
 
   async execute({ status }: IFindAllByStatusRequest): Promise<any> {
-    const listStatus = status.replace(/ /g, '').split(',');
+    const listStatus = status ? status.replace(/ /g, '').split(',') : [];
     const task = await this.taskRepository.findAllByStatus({ status: listStatus });
     return task;
   }

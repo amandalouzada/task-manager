@@ -8,25 +8,26 @@ export default class TaskController {
 
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const { title, description } = request.body;
+    const { title, description, status } = request.body;
 
     const createTask = container.resolve(CreateTaskService);
 
     const task = await createTask.execute({
       title,
-      description
+      description,
+      status
     });
 
     return response.json({ task });
   }
 
   public async listByStatus(request: Request, response: Response): Promise<Response> {
-    const { status } = request.body;
+    const { status } = request.query;
 
     const listTaskByStatus = container.resolve(ListTaskByStatusService);
 
     const tasks = await listTaskByStatus.execute({
-      status
+      status: status ? String(status):''
     });
 
     return response.json({ tasks });
