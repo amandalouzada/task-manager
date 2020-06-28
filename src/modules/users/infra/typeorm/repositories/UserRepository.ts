@@ -21,7 +21,7 @@ export default class UserRepository extends BaseRepository<User> implements IUse
 
   public async create({ name, email, password }: ICreateUserDTO): Promise<User> {
     const user = this.ormRepository.create({ name, email, password });
-    // await this.validate(user);
+    await this.validate(user);
     this.ormRepository.save(user)
     return user;
   }
