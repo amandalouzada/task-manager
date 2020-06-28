@@ -9,7 +9,7 @@ describe('CreateRoleService', () => {
   beforeEach(() => {
     mockRoleRepository = {
       create: jest.fn().mockImplementation((data: ICreateRoleDTO) => {
-        return { _id: new ObjectID(), ...data };
+        return { id: new ObjectID(), ...data };
       })
     }
 
@@ -20,12 +20,15 @@ describe('CreateRoleService', () => {
   });
 
   it('should be able to create a new role', async () => {
+
     const role = await createRole.execute({
       name: 'Admin',
       description: 'Administrador do sistema'
     });
-    expect(role).toHaveProperty('_id');
+
+    expect(role).toHaveProperty('id');
     expect(role).toHaveProperty('name','Admin');
     expect(role).toHaveProperty('description','Administrador do sistema');
+    expect(ObjectID.isValid(role.id)).toBeTruthy();
   });
 });
