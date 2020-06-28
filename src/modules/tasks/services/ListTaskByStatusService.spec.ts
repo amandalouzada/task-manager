@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { uuid } from 'uuidv4';
-import  ITaskRepository  from '../repositories/ITaskRepository';
+import ITaskRepository from '../repositories/ITaskRepository';
 import ListTaskByStatusService from './ListTaskByStatusService';
 import IFindAllByStatusDTO from '../dto/IFindAllByStatusDTO';
 
@@ -11,6 +11,8 @@ describe('ListTaskByStatusService', () => {
   beforeEach(() => {
     mockTaskRepository = {
       create: jest.fn(),
+      findById: jest.fn(),
+      save: jest.fn(),
       findAllByStatus: jest.fn()
         .mockImplementation(async (data: IFindAllByStatusDTO) => {
           const taks = [

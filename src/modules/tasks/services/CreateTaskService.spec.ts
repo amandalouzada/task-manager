@@ -13,6 +13,8 @@ describe('CreateTaskService', () => {
       create: jest.fn().mockImplementation((data: ICreateTaskDTO) => {
         return { id: uuid(), ...data };
       }),
+      findById: jest.fn(),
+      save: jest.fn(),
       findAllByStatus: jest.fn()
     }
     createTask = new CreateTaskService(mockTaskRepository);

@@ -13,6 +13,15 @@ export default class TaskRepository extends BaseRepository<Task> implements ITas
     this.ormRepository = getRepository(Task);
   }
 
+  async findById(id: string): Promise<Task | undefined> {
+    return await this.ormRepository.findOne(id);
+  }
+
+  async save(task: Task): Promise<Task> {
+    await this.validate(task);
+    return await this.ormRepository.save(task);
+  }
+
   async create(data: ICreateTaskDTO): Promise<Task> {
     const task = this.ormRepository.create(data);
     await this.validate(task);
@@ -21,11 +30,11 @@ export default class TaskRepository extends BaseRepository<Task> implements ITas
   }
 
   async findAllByStatus(data: IFindAllByStatusDTO): Promise<Task[]> {
-      const tasks = await this.ormRepository.find({
-        where: {
-          status: data.status.length > 0 ? In(data.status) : Not(IsNull())
-        }
-      })
+    const tasks = await this.ormRepository.find({
+      where: {
+        status: data.status.length > 0 ? In(data.status) : Not(IsNull())
+      }
+    })
     return tasks;
   }
 

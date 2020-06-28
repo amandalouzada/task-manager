@@ -6,14 +6,14 @@ import {
   UpdateDateColumn,
   PrimaryGeneratedColumn
 } from 'typeorm';
-import { IsNotEmpty, IsDefined, IsEmail } from 'class-validator';
+import { IsNotEmpty, IsDefined, IsEmail, IsIn } from 'class-validator';
 
 
 export enum TaskStatus {
   TO_DO = "to_do",
   DOING = "doing",
   REVIEW = "review",
-  DONE="done"
+  DONE = "done"
 }
 
 @Entity('tasks')
@@ -39,7 +39,9 @@ class Task {
   })
   @IsNotEmpty()
   @IsDefined()
+  @IsIn(Object.values(TaskStatus))
   status: TaskStatus;
+
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

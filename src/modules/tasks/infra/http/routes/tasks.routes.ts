@@ -14,5 +14,8 @@ tasksRouter.get(
   '/',
   taskController.listByStatus,
 );
-
+tasksRouter.put(
+  '/:id',
+  taskController.updateStatus,
+);
 export default tasksRouter;
