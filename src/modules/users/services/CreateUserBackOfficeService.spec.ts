@@ -82,6 +82,5 @@ describe('CreateUserBackOfficeService', () => {
     expect(user).toHaveProperty('email', 'amanda.nuneslouzada@gmail.com');
     expect(user).toHaveProperty('password');
     expect(user).toHaveProperty('roles');
-    expect(user).toHaveProperty('roles', ['backoffice']);
   });
 });

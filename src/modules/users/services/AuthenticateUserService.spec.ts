@@ -18,7 +18,21 @@ describe('AuthenticateUserService', () => {
       create: jest.fn(),
       findByEmail: jest.fn()
         .mockImplementation(async (email: string) => {
-          if (email === 'amandanuneslouzada@gmail.com') return { id: uuid(), email, password: 'A23456' };
+          if (email === 'amandanuneslouzada@gmail.com')
+            return {
+              id: uuid(),
+              email,
+              password: 'A23456',
+              roles: [
+                {
+                  id: uuid(),
+                  name: "backoffice",
+                  description: "Backoffice",
+                  createdAt: "2020-06-29T04:18:34.992Z",
+                  updatedAt: "2020-06-29T04:18:34.992Z"
+                }
+              ]
+            };
           return null;
         })
     }
