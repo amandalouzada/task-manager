@@ -1,6 +1,8 @@
+import Role from "@modules/acl/infra/typeorm/entities/Role";
+
 export default interface ICreateUserDTO {
   name: string;
   email: string;
   password: string;
-  roles?: string[];
+  roles?: Role[];
 }

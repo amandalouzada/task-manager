@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import UsersController from '../controllers/UsersController';
+import ensureRoleAuthenticated from '../middlewares/ensureRoleAuthenticated';
 
 const usersRouter = Router();
 const usersController = new UsersController();
@@ -7,7 +8,8 @@ const usersController = new UsersController();
 
 usersRouter.post(
   '/',
-  usersController.create,
+  ensureRoleAuthenticated('admin'),
+  usersController.createBackoffice,
 );
 
 export default usersRouter;
