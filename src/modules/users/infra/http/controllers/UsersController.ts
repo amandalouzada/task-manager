@@ -2,19 +2,19 @@ import { Request, Response } from 'express';
 import { container } from "tsyringe";
 import { classToClass } from 'class-transformer';
 
-import CreateUserService  from '@modules/users/services/CreateUserService';
+import CreateUserBackOfficeService from '@modules/users/services/CreateUserBackOfficeService';
 
 export default class UsersController {
 
-  public async create(request: Request, response: Response): Promise<Response> {
-    const { name, email, password } = request.body;
+  public async createBackoffice(request: Request, response: Response): Promise<Response> {
+    const { name, email, password ,rolesId} = request.body;
 
-    const createUser = container.resolve(CreateUserService);
+    const createUserBackoffice = container.resolve(CreateUserBackOfficeService);
 
-    const user = await createUser.execute({
+    const user = await createUserBackoffice.execute({
       name,
       email,
-      password,
+      password
     });
     return response.json(classToClass(user));
   }

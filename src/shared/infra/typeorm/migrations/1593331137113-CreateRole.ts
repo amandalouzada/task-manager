@@ -17,6 +17,7 @@ export class CreateRole1593331137113 implements MigrationInterface {
                     {
                         name: 'name',
                         type: 'varchar',
+                        isUnique: true
                     },
                     {
                         name: 'description',

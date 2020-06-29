@@ -11,7 +11,7 @@ interface IUserRequest {
   rolesId?: string[];
 }
 @injectable()
-class CreateUserService {
+class CreateUserBackOfficeService {
 
   constructor(
     @inject('UserRepository')
@@ -34,15 +34,16 @@ class CreateUserService {
 
     const hashedPassword = await this.hashProvider.generateHash(password);
 
-    const roles = await this.roleRepository.findByIds(rolesId);
+    const role = await this.roleRepository.findByName('backoffice');
+    if (!role) throw new AppError('Role not found');
     const user = await this.userRepository.create({
       name,
       email,
       password: hashedPassword,
-      roles
+      roles: [role]
     });
     return user;
   }
 }
 
-export default CreateUserService;
+export default CreateUserBackOfficeService;

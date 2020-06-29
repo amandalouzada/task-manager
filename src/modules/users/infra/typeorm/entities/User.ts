@@ -18,31 +18,43 @@ class User {
   @PrimaryGeneratedColumn('uuid')
   id: ObjectID;
 
-  @Column({ nullable:false, unique: true })
+  @Column({ nullable: false, unique: true })
   @IsNotEmpty()
   @IsDefined()
   @IsEmail()
   email: string;
 
-  @Column({ nullable:false})
+  @Column({ nullable: false })
   @IsNotEmpty()
   @IsDefined()
   name: string;
 
-  @Column({ nullable:false})
+  @Column({ nullable: false })
   @Exclude()
   @IsNotEmpty()
   @IsDefined()
   password: string;
 
-  @ManyToMany(() => Role)
-  @JoinTable({name:'users_roles'})
+  @ManyToMany(type => Role)
+  @JoinTable({
+    name: 'users_roles',
+    joinColumns: [
+      {
+        name: 'user_id',
+      }],
+    inverseJoinColumns: [
+      {
+        name: 'role_id',
+      }
+    ]
+  })
   roles: Role[];
 
-  @CreateDateColumn({name:'created_at'})
+
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn({name:'updated_at'})
+  @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 }
 

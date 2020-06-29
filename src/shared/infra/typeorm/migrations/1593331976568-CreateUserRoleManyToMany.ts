@@ -1,4 +1,5 @@
 import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
+import { hash } from 'bcryptjs';
 
 export class CreateUserRoleManyToMany1593331976568 implements MigrationInterface {
 
@@ -52,6 +53,51 @@ export class CreateUserRoleManyToMany1593331976568 implements MigrationInterface
                 onUpdate: 'CASCADE',
             }),
         );
+
+        const roleAdmin = await queryRunner
+            .manager
+            .createQueryBuilder()
+            .insert()
+            .into("roles")
+            .values({
+                name: 'admin',
+                description: 'Administrador'
+            })
+            .execute()
+        await queryRunner
+            .manager
+            .createQueryBuilder()
+            .insert()
+            .into("roles")
+            .values({
+                name: 'backoffice',
+                description: 'Backoffice'
+            })
+            .execute()
+
+        const userAdmin = await queryRunner
+            .manager
+            .createQueryBuilder()
+            .insert()
+            .into("users")
+            .values({
+                name: 'Administrador',
+                email: 'emailadmin@email.com',
+                password: await hash('123456', 8),
+            })
+            .execute()
+
+
+        await queryRunner
+            .manager
+            .createQueryBuilder()
+            .insert()
+            .into("users_roles")
+            .values({
+                user_id: userAdmin.identifiers[0].id,
+                role_id: roleAdmin.identifiers[0].id
+            })
+            .execute()
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
