@@ -7,7 +7,8 @@ Gerenciador de tarefas
 - Babel (for builds);
 - Docker & Docker Compose (Setup environment);
 - Jest (for tests);
-- MongoDB
+- Postgres
+- Redis (rate limit)
 - TSyringe (dependency injection container)
 
 
