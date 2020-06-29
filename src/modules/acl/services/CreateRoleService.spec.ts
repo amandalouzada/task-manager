@@ -12,7 +12,8 @@ describe('CreateRoleService', () => {
       create: jest.fn().mockImplementation((data: ICreateRoleDTO) => {
         return { id: uuid(), ...data };
       }),
-      findByIds: jest.fn()
+      findByIds: jest.fn(),
+      findByName:jest.fn()
     }
 
     createRole = new CreateRoleService(

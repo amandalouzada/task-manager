@@ -10,7 +10,7 @@ export class RoleRepository extends BaseRepository<Role> implements IRoleReposit
     this.ormRepository = getRepository(Role);
   }
 
-  public async findByName(name: string): Promise<Role> {
+  public async findByName(name: string): Promise<Role | undefined> {
     return await this.ormRepository.findOne({name});
   }
 
