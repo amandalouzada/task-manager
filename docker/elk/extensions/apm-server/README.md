@@ -29,7 +29,7 @@ app = Flask(__name__)
 app.config['ELASTIC_APM'] = {
     # Set required service name. Allowed characters:
     # a-z, A-Z, 0-9, -, _, and space
-    'SERVICE_NAME': 'PYTHON_FLASK_TEST_APP',
+    'SERVICE_NAME': 'TASK_MANAGER_APP',
 
     # Set custom APM Server URL (default: http://localhost:8200)
     'SERVER_URL': 'http://apm-server:8200',

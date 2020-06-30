@@ -1,43 +1,23 @@
 //@ts-ignore
-const LogstashClient = require('logstash-client')
-import fs from 'fs';
+import LogstashClient from 'logstash-client';
+import logstashConfig, { applicationName } from '@config/logstash';
 
-const pathPackageJson = `${__dirname}/../../package.json`
-let applicationName = process.env.LOGSTASH_APPLICATION_NAME || false
 
-if (!applicationName && fs.existsSync(pathPackageJson))
-  applicationName = require(pathPackageJson).name
+const logstash = new LogstashClient({
+  ...logstashConfig
+});
 
 /**
- * Envia envento de log para o logstash
+ * Send event log to logstash
  * @param {JSON} logContent 
  */
 const sendLog = (logContent: { [key: string]: any } = {}, keep = true) => {
-  const logstash = new LogstashClient({
-    type: 'tcp', // udp, tcp, memory
-    host: 'localhost',
-    port: 5000
-  });
 
   logContent['@timestamp'] = new Date()
+  logContent['aplication_name'] = applicationName;
 
-  // if (!logContent.application_name && applicationName)
-  //   logContent['application_name'] = applicationName
+  logstash.send(logContent)
 
-  // logContent['keep_log'] = keep ? "true" : "false"
-
-  logstash.send(logContent, (a:any) => {
-    console.log('OK')
-  })
-
-
-  if (process.env.NODE_ENV == 'development')
-    console.log(logContent)
 }
 
 export default sendLog
-
-
-sendLog({
-  teste: 'Meu primeiro log'
-});

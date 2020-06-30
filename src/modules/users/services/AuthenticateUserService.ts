@@ -5,6 +5,7 @@ import AppError from '@shared/errors/AppError';
 import IUserRepository from '../repositories/IUserRepository';
 import IHashProvider from '../providers/hashProvider/models/IHashProvider';
 import Role from '@modules/acl/infra/typeorm/entities/Role';
+import sendLog from '@shared/container/providers/LogstashProvider/LogstashProvider';
 
 interface IAuthRequest {
   email: string;
@@ -46,6 +47,10 @@ class AuthenticateUserService {
       expiresIn,
     });
 
+    sendLog({
+      index_log: 'login',
+      sub: user.id
+    });
     return {
       user,
       token,
