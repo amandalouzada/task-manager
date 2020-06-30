@@ -43,7 +43,7 @@ class AuthenticateUserService {
     const token = sign({
       roles: user.roles.map((role: Role) => role.name)
     }, secret, {
-      subject: user.id,
+      subject: String(user.id),
       expiresIn,
     });
     return {

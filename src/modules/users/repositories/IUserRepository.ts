@@ -6,5 +6,5 @@ import User from "../infra/typeorm/entities/User";
 export default interface IUserRepository {
   create(data: ICreateUserDTO): Promise<User>;
   findByEmail(email: string): Promise<User | undefined>;
-  findAll(data: IFindAllDTO): Promise<User>;
+  findAll(data: IFindAllDTO): Promise<User[]>;
 }
