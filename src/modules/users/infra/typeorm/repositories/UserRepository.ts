@@ -3,6 +3,7 @@ import IUserRepository from "@modules/users/repositories/IUserRepository";
 import User from "../entities/User";
 import ICreateUserDTO from "@modules/users/dto/ICreateUserDTO";
 import BaseRepository from "@shared/infra/typeorm/repositories/BaseRepository";
+import IFindAllDTO from "@modules/users/dto/IFindAllDTO";
 
 
 export default class UserRepository extends BaseRepository<User> implements IUserRepository {
@@ -11,8 +12,12 @@ export default class UserRepository extends BaseRepository<User> implements IUse
     super()
     this.ormRepository = getRepository(User);
   }
+  
+  public async findAll(data: IFindAllDTO): Promise<User> {
+    throw new Error("Method not implemented.");
+  }
 
-  public async findByEmail(email: string): Promise<any> {
+  public async findByEmail(email: string): Promise<User | undefined> {
     const user = await this.ormRepository.findOne({
       relations: ["roles"],
       where: { email },

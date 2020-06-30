@@ -28,7 +28,9 @@ describe('CreateUserBackOfficeService', () => {
         .mockImplementation(async (email: string) => {
           if (email === 'amandanuneslouzada@gmail.com') return { email };
           return null;
-        })
+        }),
+      findAll: jest.fn()
+
     }
     mockRoleRepository = {
       create: jest.fn(),
@@ -46,7 +48,7 @@ describe('CreateUserBackOfficeService', () => {
         .mockImplementation((name: string) => {
           return {
             id: uuid(),
-            name:name ,
+            name: name,
             description: `Role ${name} description`,
           }
         }),
