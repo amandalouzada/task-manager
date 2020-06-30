@@ -34,7 +34,9 @@ describe('AuthenticateUserService', () => {
               ]
             };
           return null;
-        })
+        }),
+      findAll: jest.fn()
+
     }
     hashedProvider = {
       generateHash: jest.fn().mockImplementation(async (password: string) => {

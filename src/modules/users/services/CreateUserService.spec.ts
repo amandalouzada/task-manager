@@ -28,7 +28,9 @@ describe('CreateUserService', () => {
         .mockImplementation(async (email: string) => {
           if (email === 'amandanuneslouzada@gmail.com') return { email };
           return null;
-        })
+        }),
+      findAll: jest.fn()
+
     }
     mockRoleRepository = {
       create: jest.fn(),

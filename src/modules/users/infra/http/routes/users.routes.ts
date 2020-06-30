@@ -12,4 +12,11 @@ usersRouter.post(
   usersController.createBackoffice,
 );
 
+usersRouter.get(
+  '/',
+  ensureRoleAuthenticated('admin'),
+  usersController.listAll,
+);
+
+
 export default usersRouter;
