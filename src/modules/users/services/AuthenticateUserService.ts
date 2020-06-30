@@ -46,11 +46,6 @@ class AuthenticateUserService {
       subject: user.id,
       expiresIn,
     });
-
-    sendLog({
-      index_log: 'login',
-      sub: user.id
-    });
     return {
       user,
       token,
