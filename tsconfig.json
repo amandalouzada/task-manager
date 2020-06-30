@@ -19,6 +19,7 @@
     "forceConsistentCasingInFileNames": true
   },
   "exclude":[
-    "babel.config.js"
+    "babel.config.js",
+    "coverage"
   ]
 }
