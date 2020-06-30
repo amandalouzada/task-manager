@@ -10,6 +10,7 @@ Gerenciador de tarefas
 - Postgres
 - Redis (rate limit)
 - TSyringe (dependency injection container)
+- Elasticsearch, Logstash, Kibana e APM (Monitoramento de Logs)
 
 
 # Run

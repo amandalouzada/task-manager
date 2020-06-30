@@ -20,6 +20,8 @@
   },
   "exclude":[
     "babel.config.js",
-    "coverage"
+    "coverage",
+    "docker",
+    "jest.config.js"
   ]
 }

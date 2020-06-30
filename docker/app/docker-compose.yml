@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  task-mananger:
+    container_name: task-mananger
+    build:
+      dockerfile: ./docker/app/app.dockerfile
+      context: ../../
+    volumes:
+      - ../:/root/task-mananger
+    depends_on:
+      - redis-task
+      - postgres-task
+    ports:
+      - 3000:3000
+    networks:
+      - task
+
+  redis-task:
+    image: "redis:alpine"
+    container_name: redis-task
+    networks:
+      - task
+    restart: "always"
+    ports:
+      - 6379:6379
+
+  postgres-task:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
+    networks:
+      - task
+
+networks:
+  task:
+    driver: bridge

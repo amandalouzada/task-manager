@@ -19,6 +19,7 @@ const getApplicationName = () => {
 
   if (!applicationName && fs.existsSync(pathPackageJson))
     applicationName = require(pathPackageJson).name
+    
   return applicationName;
 }
 
