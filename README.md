@@ -27,8 +27,8 @@ Gerenciador de tarefas
 
 
 # Endpoints 
-[insomnia](https://github.com/amandalouzada/task-manager/blob/master/task-manager.json)
-[postman](https://documenter.getpostman.com/view/1733937/T17Dgor7?version=latest#13676967-030a-4cd5-8bcf-c2e750cd865d)
+- [insomnia json](https://github.com/amandalouzada/task-manager/blob/master/task-manager.json)
+- [postman doc](https://documenter.getpostman.com/view/1733937/T17Dgor7?version=latest#13676967-030a-4cd5-8bcf-c2e750cd865d)
 
 
 # Monitoramento de Logs
