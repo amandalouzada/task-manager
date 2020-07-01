@@ -18,6 +18,12 @@ Gerenciador de tarefas
   docker exec -it 
 
 
+
+# Endpoints 
+
+  arquivo task-manager.json
+
+
 # Monitoramento de Logs
 
   ELK stack - APM
