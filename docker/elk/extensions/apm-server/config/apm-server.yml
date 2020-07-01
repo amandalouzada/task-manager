@@ -1,0 +1,8 @@
+apm-server:
+  host: 0.0.0.0:8200
+  secret_token: "TLWyhTGb9rfiihH2EvzAmydZfwlzynRa"
+output:
+  elasticsearch:
+    hosts: ['http://elasticsearch:9200']
+    username: elastic
+    password: NxKiQFpsDKe0UnZc7sB2
