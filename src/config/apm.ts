@@ -10,7 +10,7 @@ interface IApmConfig {
 export const envApmServer: IApmConfig = {
   serviceName: process.env.APM_SERVICE_NAME || 'apm-server',
   secretToken: process.env.APM_TOKEN || 'TLWyhTGb9rfiihH2EvzAmydZfwlzynRa',
-  serverUrl: process.env.APM_URL || 'http://192.168.0.136:8200',
+  serverUrl: process.env.APM_URL || 'http://localhost:8200',
 };
 
 

@@ -3,9 +3,6 @@ COPY ./ /root/task-manager
 WORKDIR /root/task-manager
 
 RUN npm install 
+RUN npm run typeorm migration:run
 
 COPY . ./
-
-EXPOSE 3000
-
-CMD npm run dev
