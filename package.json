@@ -2,6 +2,7 @@
   "name": "task-manager",
   "version": "1.0.0",
   "description": "",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/amandalouzada/task-manager.git"
@@ -14,6 +15,7 @@
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpileOnly --ignore-watch node_modules  src/app.ts",
     "start": "ts-node -r tsconfig-paths/register src/app.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "migration":"npm run typeorm migration:run",
     "test": "jest"
   },
   "devDependencies": {

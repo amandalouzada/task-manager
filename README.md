@@ -14,13 +14,21 @@ Gerenciador de tarefas
 
 
 # Run
-  docker-compose -f docker/ocker-compose.yml up --build
-  docker exec -it 
+
+```
+  docker-compose up
+```
+
+```
+  docker exec -ti task-mananger /bin/sh -c "npm run typeorm migration:run"
+
+```
 
 
 
 # Endpoints 
-[arquivo task-manager.json](https://github.com/amandalouzada/task-manager/blob/master/task-manager.json)
+[insomnia](https://github.com/amandalouzada/task-manager/blob/master/task-manager.json)
+[postman](https://documenter.getpostman.com/view/1733937/T17Dgor7?version=latest#13676967-030a-4cd5-8bcf-c2e750cd865d)
 
 
 # Monitoramento de Logs

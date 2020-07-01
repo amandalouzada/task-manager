@@ -19,11 +19,20 @@ services:
       - task
   task-mananger:
     container_name: task-mananger
-    build:
-      dockerfile: ./docker/app.dockerfile
-      context: ../
+    build: .
     volumes:
-      - ../:/root/task-mananger
+      - .:/root/task-mananger
+    environment:
+      - NODE_ENV=development
+      - APP_PORT=3000
+      - APP_NAME=taks-manager
+      - SERVER_DOMAIN=localhost:3000
+      - SECRET_KEY=123456
+      - REDIS_HOST=redis-task
+      - REDIS_PORT=6379
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=postgres-task
+      - REDIS_PASS=
     depends_on:
       - redis-task
       - postgres-task
